@@ -12,7 +12,8 @@ import (
 //implementasi http testing
 
 func HelloHandler(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprint(writer, "Test running unit test")
+	_, err := fmt.Fprint(writer, "Test running unit test")
+	helper.PanicIfErr(err)
 
 }
 
@@ -25,6 +26,7 @@ func TestHttp(t *testing.T) {
 	response := recorder.Result()
 	body, err := io.ReadAll(response.Body)
 	helper.PanicIfErr(err)
+
 	bodyString := string(body)
 
 	fmt.Println(bodyString)
